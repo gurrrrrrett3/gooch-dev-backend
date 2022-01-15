@@ -1,0 +1,20 @@
+{
+    "baseURL": "https://zion.craftyourtown.com/",
+    "filePath": "modules/cyt/data/",
+    "data": [{
+            "filename": "players.json",
+            "fileLocation": "downloaded/",
+            "url": "/tiles/players.json"
+        },
+        {
+            "filename": "earthMarkers.json",
+            "fileLocation": "downloaded/",
+            "url": "/tiles/earth/markers.json"
+        },
+        {
+            "filename": "worldMarkers.json",
+            "fileLocation": "downloaded/",
+            "url": "/tiles/world/markers.json"
+        }
+    ]
+}

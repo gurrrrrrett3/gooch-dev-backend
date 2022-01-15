@@ -1,0 +1,24 @@
+{
+    "filePath": "modules/cyt/data/",
+    "data": [{
+            "location": "downloaded/",
+            "name": "earthMarkers.json",
+            "data": []
+        },
+        {
+            "location": "downloaded/",
+            "name": "worldMarkers.json",
+            "data": []
+        },
+        {
+            "location": "downloaded/",
+            "name": "players.json",
+            "data": []
+        },
+        {
+            "location": "created/",
+            "name": "towns.json",
+            "data": []
+        }
+    ]
+}

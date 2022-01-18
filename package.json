@@ -19,9 +19,11 @@
     "homepage": "https://github.com/gurrrrrrett3/gooch-dev-backend#readme",
     "dependencies": {
         "express": "^4.17.2",
-        "node-fetch": "^2.6.6"
+        "node-fetch": "^2.6.6",
+        "node-html-parser": "^5.2.0"
     },
     "devDependencies": {
+        "@types/express": "^4.17.13",
         "@types/node-fetch": "^2.5.12"
     }
 }

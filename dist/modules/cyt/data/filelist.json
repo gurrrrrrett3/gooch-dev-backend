@@ -16,5 +16,22 @@
             "fileLocation": "downloaded/",
             "url": "/tiles/world/markers.json"
         }
-    ]
+    ],
+    "files": {
+        "players": {
+            "filename": "players.json",
+            "fileLocation": "downloaded/",
+            "url": "/tiles/players.json"
+        },
+        "earthMarkers": {
+            "filename": "earthMarkers.json",
+            "fileLocation": "downloaded/",
+            "url": "/tiles/earth/markers.json"
+        },
+        "worldMarkers": {
+            "filename": "worldMarkers.json",
+            "fileLocation": "downloaded/",
+            "url": "/tiles/world/markers.json"
+        }
+    }
 }

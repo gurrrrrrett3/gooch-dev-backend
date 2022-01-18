@@ -1,40 +1,25 @@
 import CytUpdate from "./update";
 export default class CYT {
+  private interval: any;
+  //@ts-ignore
+  public static instance: CYT;
 
-    private interval: any;
-    //@ts-ignore
-    public static instance: CYT
+  constructor(delay: number = 10000) {
+    this.interval = setInterval(() => {
+      this.update();
+    }, delay);
+  }
 
-    constructor (delay: number = 10000) {
+  public static Start() {
+    this.instance = new CYT();
+    this.instance.update();
+  }
 
-        this.interval = setInterval(() => {
+  public Stop() {
+    clearInterval(this.interval);
+  }
 
-            this.update();
-
-        }, delay);
-    }
-
-    public static Start() {
-
-        this.instance = new CYT();
-        this.instance.update()
-
-    }
-
-
-    public Stop() {
-
-        clearInterval(this.interval);
-
-    }
-
-    public update() {
-
-        CytUpdate.startUpdate();
-
-
-    }
-
-
-
+  public update() {
+    CytUpdate.startUpdate();
+  }
 }

@@ -20,5 +20,31 @@
             "name": "towns.json",
             "data": []
         }
-    ]
+    ],
+    "files": {
+        "downloaded": {
+            "earthMarkers": {
+                "name": "earthMarkers.json",
+                "location": "downloaded/",
+                "data": []
+            },
+            "worldMarkers": {
+                "name": "worldMarkers.json",
+                "location": "downloaded/",
+                "data": []
+            },
+            "players": {
+                "name": "players.json",
+                "location": "downloaded/",
+                "data": []
+            }
+        },
+        "created": {
+            "towns": {
+                "name": "towns.json",
+                "location": "created/",
+                "data": []
+            }
+        }
+    }
 }

@@ -4,11 +4,13 @@ import fetch from "node-fetch";
 import defaultFiles from "./data/defaultFiles.json";
 import filelist from "./data/filelist.json";
 import fetchData from "./data/fetchData.json";
+import { Town } from "../util/types";
+import CYTParse from "./parse";
 export default class CytUpdate {
   public static startUpdate() {
     this.checkForFiles();
-
     this.downloadFiles();
+    this.parseTowns();
   }
 
   private static checkForFiles() {
@@ -39,8 +41,8 @@ export default class CytUpdate {
         try {
           const res = await fetch(filelist.baseURL + file.url, {
             method: "GET",
-            headers: fetchData.headers
-            });
+            headers: fetchData.headers,
+          });
           const data = await res.text();
 
           fs.writeFileSync(
@@ -54,5 +56,56 @@ export default class CytUpdate {
         }
       }
     });
+  }
+
+  private static parseTowns() {
+    const markers = {
+      world: JSON.parse(
+        fs
+          .readFileSync(
+            path.resolve(
+              filelist.filePath,
+              filelist.files.worldMarkers.fileLocation,
+              filelist.files.worldMarkers.filename
+            ),
+            "utf8"
+          )
+          .toString()
+      ),
+      earth: JSON.parse(
+        fs
+          .readFileSync(
+            path.resolve(
+              filelist.filePath,
+              filelist.files.earthMarkers.fileLocation,
+              filelist.files.earthMarkers.filename
+            ),
+            "utf8"
+          )
+          .toString()
+      ),
+    };
+
+    const towns: Town[] = [];
+
+    Object.keys(markers).forEach((world) => {
+      //@ts-ignore
+      markers[world][1].markers.forEach((marker: any) => {
+        if (marker.type == "icon") {
+          const town = CYTParse.parseIcon(marker, world);
+            towns.push(town);
+        }
+      });
+    });
+
+    console.log(towns.length);
+
+    fs.writeFileSync(
+      path.resolve(
+        defaultFiles.filePath,
+        defaultFiles.files.created.towns.location + defaultFiles.files.created.towns.name
+      ),
+      JSON.stringify(towns, null, 2)
+    );
   }
 }

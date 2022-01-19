@@ -19,6 +19,11 @@
             "location": "created/",
             "name": "towns.json",
             "data": []
+        },
+        {
+            "location": "created/",
+            "name": "townFallLog.json",
+            "data": []
         }
     ],
     "files": {
@@ -42,6 +47,11 @@
         "created": {
             "towns": {
                 "name": "towns.json",
+                "location": "created/",
+                "data": []
+            },
+            "townFallLog": {
+                "name": "townFallLog.json",
                 "location": "created/",
                 "data": []
             }

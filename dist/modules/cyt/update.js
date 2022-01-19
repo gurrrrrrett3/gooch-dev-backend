@@ -79,7 +79,6 @@ class CytUpdate {
                 }
             });
         });
-        console.log(towns.length);
         fs_1.default.writeFileSync(path_1.default.resolve(defaultFiles_json_1.default.filePath, defaultFiles_json_1.default.files.created.towns.location + defaultFiles_json_1.default.files.created.towns.name), JSON.stringify(towns, null, 2));
     }
 }

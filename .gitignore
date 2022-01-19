@@ -74,3 +74,11 @@ typings/
 
 # FuseBox cache
 .fusebox/
+
+# Compiled TypeScript
+/dist
+
+# CYT Data files
+modules/cyt/data/downloaded/
+modules/cyt/data/created/
+modules/cyt/data/errors/

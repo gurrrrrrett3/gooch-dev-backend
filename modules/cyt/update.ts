@@ -98,7 +98,6 @@ export default class CytUpdate {
       });
     });
 
-    console.log(towns.length);
 
     fs.writeFileSync(
       path.resolve(

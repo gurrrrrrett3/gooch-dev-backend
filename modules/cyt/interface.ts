@@ -32,13 +32,17 @@ export default class CYTInterface {
           "utf8"
         )
         .toString()
-    )
+    );
   }
 
-  public static getPlayer(playerName: string): Player {
+  public static getPlayer(playerName: string): Player | string {
     const playerdata = this.getPlayerFile().find((player: Player) => {
       return player.name.toLowerCase() === playerName.toLowerCase();
     });
+
+    if (!playerdata) {
+      return "Player not found";
+    }
 
     return playerdata;
   }
@@ -83,39 +87,49 @@ export default class CYTInterface {
     return town;
   }
 
-  public static getPlayerTown(playerName: string): Town {
+  public static getPlayerTown(playerName: string): Town | string {
     const player = this.getPlayer(playerName);
 
-    const towns = this.getTownFile();
+    if (player === "Player not found") {
+      return "Player not found";
+    } else {
+      const towns = this.getTownFile();
 
-    const town = towns.find((town: Town) => {
-      return town.residents.includes(player.name);
-    });
+      const town = towns.find((town: Town) => {
+        //@ts-ignore
+        return town.residents.includes(player.name);
+      });
 
-    return town;
+      return town;
+    }
   }
 
   public static getOnlineTowns() {
     let players = this.getPlayerFile();
 
-    let onlineTowns: { town: string; online: number }[] = [];
+    let onlineTowns: { town: string; online: number }[] = [{ town: "Townless", online: 0 }];
 
     players.forEach((player: Player) => {
       const town = this.getPlayerTown(player.name);
-      if (!town) return;
-      const data = { town: town.name, online: 1 };
 
-      if (
-        !onlineTowns.find((town: { town: string; online: number }) => {
-          return town.town === data.town;
-        })
-      ) {
-        onlineTowns.push(data);
+      if (!town) {
+        onlineTowns[0].online++;
       } else {
-        //@ts-ignore
-        onlineTowns.find((town: { town: string; online: number }) => {
-          return town.town === data.town;
-        }).online++;
+          //@ts-ignore
+        const data = { town: town.name, online: 1 };
+
+        if (
+          !onlineTowns.find((town: { town: string; online: number }) => {
+            return town.town === data.town;
+          })
+        ) {
+          onlineTowns.push(data);
+        } else {
+          //@ts-ignore
+          onlineTowns.find((town: { town: string; online: number }) => {
+            return town.town === data.town;
+          }).online++;
+        }
       }
     });
 

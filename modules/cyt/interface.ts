@@ -3,6 +3,7 @@ import path from "path";
 import { Player, Town } from "../util/types";
 import fileList from "./data/filelist.json";
 import defaultFiles from "./data/defaultFiles.json";
+import Util from "../util";
 
 export default class CYTInterface {
   public static getPlayerFile() {
@@ -12,7 +13,7 @@ export default class CYTInterface {
           path.resolve(
             fileList.filePath,
             fileList.files.players.fileLocation,
-            fileList.files.players.filename
+            fileList.files.players.fileName
           ),
           "utf8"
         )
@@ -115,7 +116,7 @@ export default class CYTInterface {
       if (!town) {
         onlineTowns[0].online++;
       } else {
-          //@ts-ignore
+        //@ts-ignore
         const data = { town: town.name, online: 1 };
 
         if (
@@ -135,4 +136,33 @@ export default class CYTInterface {
 
     return onlineTowns;
   }
+
+  public static getPlayersNearby(playerName: string, radius: number): { player: string; distance: number }[] {
+    return this.getSortedNearbyPlayers(playerName).filter((player: { player: string; distance: number }) => {
+      return player.distance <= radius;
+    })
+  }
+
+  public static getSortedNearbyPlayers(playerName: string): { player: string; distance: number }[] {
+    const player = this.getPlayer(playerName);
+
+    if (player === "Player not found") {
+      return [];
+    } else {
+      const players = this.getPlayerFile();
+
+      const nearbyPlayers: { player: string; distance: number }[] = [];
+
+      players.forEach((player2: Player) => {
+        if (typeof player == "string")  return
+        if (player.name !== player2.name && player.world === player2.world) {
+          nearbyPlayers.push({ player: player2.name, distance: Util.getDistance({ x: player.x, z: player.z }, { x: player2.x, z: player2.z }) });
+        }
+      });
+
+      return nearbyPlayers.sort((a, b) => a.distance - b.distance);
+    }
+  }
+
+
 }

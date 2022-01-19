@@ -1,0 +1,23 @@
+##gooch.dev backend
+
+
+##Frame Delay
+#time between each frame
+
+FrameTime: 10000
+
+##Logging
+
+#Logger Mode
+
+#CONSOLE only to console
+#FILE only to files
+#BOTH both
+
+LoggerMode: "BOTH"
+
+##Sensitivity
+
+#How far does a player have to travel in a "frame" to consider it a teleport?
+
+TeleportDistance: 250

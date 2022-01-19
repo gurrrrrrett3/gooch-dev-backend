@@ -1,0 +1,14 @@
+{
+    "path": "modules/cyt/data/logs/",
+    "assistantAdd": "assistantAdd/",
+    "assistantRemove": "assistantRemove/",
+    "memberJoin": "memberJoin/",
+    "memberLeave": "memberLeave/",
+    "playerJoin": "playerJoin/",
+    "playerLeave": "playerLeave/",
+    "PlayerTp": "playerTp/",
+    "pvpToggle": "pvpToggle/",
+    "townFall": "townFall/",
+    "townRise": "townRise/",
+    "mayorChange": "mayorChange/"
+}

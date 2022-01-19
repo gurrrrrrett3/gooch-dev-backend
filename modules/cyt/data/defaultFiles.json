@@ -19,11 +19,6 @@
             "location": "created/",
             "name": "towns.json",
             "data": []
-        },
-        {
-            "location": "created/",
-            "name": "townFallLog.json",
-            "data": []
         }
     ],
     "files": {
@@ -56,5 +51,22 @@
                 "data": []
             }
         }
+    },
+    "logs": {
+        "logFilePath": "logs/",
+        "dirs": [
+            "logs",
+            "logs/townFall",
+            "logs/townRise",
+            "logs/playerTp",
+            "logs/memberJoin",
+            "logs/memberLeave",
+            "logs/pvpToggle",
+            "logs/assistantAdd",
+            "logs/assistantRemove",
+            "logs/playerJoin",
+            "logs/playerLeave",
+            "logs/mayorChange"
+        ]
     }
 }

@@ -15,8 +15,16 @@ router.get("/players", (req, res) => {
 })
 
 router.get("/player/:username", (req, res) => {
-
     res.send(cytInterface.getPlayer(req.params.username));
+})
+
+router.get("/player/nearby/:playername", (req, res) => {
+    res.send(cytInterface.getSortedNearbyPlayers(req.params.playername));
+})
+
+router.get("/player/nearby/:playername/:radius", (req, res) => {
+
+    res.send(cytInterface.getPlayersNearby(req.params.playername, parseInt(req.params.radius)));
 
 })
 
@@ -35,6 +43,8 @@ router.get("/town/:townname", (req, res) => {
 router.get("/towns/online", (req, res) => {
     res.send(cytInterface.getOnlineTowns());
 })
+
+
 
 
 

@@ -2,34 +2,34 @@
     "baseURL": "https://zion.craftyourtown.com/",
     "filePath": "modules/cyt/data/",
     "data": [{
-            "filename": "players.json",
+            "fileName": "players.json",
             "fileLocation": "downloaded/",
             "url": "/tiles/players.json"
         },
         {
-            "filename": "earthMarkers.json",
+            "fileName": "earthMarkers.json",
             "fileLocation": "downloaded/",
             "url": "/tiles/earth/markers.json"
         },
         {
-            "filename": "worldMarkers.json",
+            "fileName": "worldMarkers.json",
             "fileLocation": "downloaded/",
             "url": "/tiles/world/markers.json"
         }
     ],
     "files": {
         "players": {
-            "filename": "players.json",
+            "fileName": "players.json",
             "fileLocation": "downloaded/",
             "url": "/tiles/players.json"
         },
         "earthMarkers": {
-            "filename": "earthMarkers.json",
+            "fileName": "earthMarkers.json",
             "fileLocation": "downloaded/",
             "url": "/tiles/earth/markers.json"
         },
         "worldMarkers": {
-            "filename": "worldMarkers.json",
+            "fileName": "worldMarkers.json",
             "fileLocation": "downloaded/",
             "url": "/tiles/world/markers.json"
         }

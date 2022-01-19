@@ -1,6 +1,7 @@
 import fs from "fs";
 import { Module } from "./util/types";
 import startList from "./util/data/startList.json";
+import Logger from "./util/logger";
 export default class StartModules {
   public static modules: Module[] = [];
 
@@ -8,7 +9,7 @@ export default class StartModules {
     fs.readdirSync("./modules").forEach(async (folder) => {
       if (!folder.includes(".") && startList.includes(folder)) {
         await import(`./${folder}/index.js`).then((module: Module) => {
-          console.log(`Starting module: ${folder}`);
+          Logger.log(`Starting module: ${folder}`);
           module.default.Start();
         });
       }
@@ -19,7 +20,7 @@ export default class StartModules {
     fs.readdirSync("./modules").forEach(async (folder) => {
       if (!folder.includes(".") && startList.includes(folder)) {
         await import(`./${folder}/index.js`).then((module: Module) => {
-          console.log(`Stopping module: ${folder}`);
+          Logger.log(`Stopping module: ${folder}`);
           module.default.Stop();
         });
       }
@@ -28,14 +29,14 @@ export default class StartModules {
 
     public static async start(module: string) {
     await import(`./${module}/index.js`).then((mod: Module) => {
-      console.log(`Starting module: ${module}`);
+      Logger.log(`Starting module: ${module}`);
       mod.default.Start();
     });
   }
 
     public static async stop(module: string) {
     await import(`./${module}/index.js`).then((mod: Module) => {
-      console.log(`Stopping module: ${module}`);
+      Logger.log(`Stopping module: ${module}`);
       mod.default.Stop();
     });
   }

@@ -33,6 +33,10 @@ export default class CYTParse {
       .split(",")
       .map((r) => r.trim());
 
+      if (town.assistants == ["None"]) {
+        town.assistants = [];
+      }
+
     return town;
   }
 }

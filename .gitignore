@@ -82,3 +82,9 @@ typings/
 modules/cyt/data/downloaded/
 modules/cyt/data/created/
 modules/cyt/data/errors/
+
+#Logs
+modules/util/logs/
+
+#Town Logs
+modules/cyt/data/logs/

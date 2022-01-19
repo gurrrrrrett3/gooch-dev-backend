@@ -2,6 +2,9 @@ import fs from "fs";
 import Config from "./config";
 export default class Logger {
   public static log(message: string, ...optionalParams: any[]): void {
+
+    fs.existsSync("logs") || fs.mkdirSync("logs");
+
     const loggerMode = Config.getValue("LoggerMode");
     if (loggerMode == "BOTH" || "FILE") {
       const d = new Date();

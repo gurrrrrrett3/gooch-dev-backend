@@ -28,7 +28,7 @@ router.get("/player/nearby/:playername/:radius", (req, res) => {
 
 })
 
-router.get("/online", (req, res) => {
+router.get("/players/online", (req, res) => {
     res.send(cytInterface.getOnlineCounts());
 })
 
@@ -43,10 +43,5 @@ router.get("/town/:townname", (req, res) => {
 router.get("/towns/online", (req, res) => {
     res.send(cytInterface.getOnlineTowns());
 })
-
-
-
-
-
 
 export default router;

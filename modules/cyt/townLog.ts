@@ -27,15 +27,32 @@ export default class TownLog {
   }
 
   public static saveOldTowns() {
+    
+    if (!fs.existsSync(defaultFiles.filePath +
+        defaultFiles.files.created.towns.location +
+        defaultFiles.files.created.towns.name)) {
+            Logger.log("Towns file not found, waiting while it is created...");
+            return;
+        }
+
+    
     fs.copyFileSync(
       defaultFiles.filePath +
         defaultFiles.files.created.towns.location +
         defaultFiles.files.created.towns.name,
       defaultFiles.filePath + defaultFiles.logs.logFilePath + "towns.old.json"
-    );
+    )
   }
 
   public static saveOldPlayers() {
+
+    if (!fs.existsSync( defaultFiles.filePath +
+        defaultFiles.files.downloaded.players.location +
+        defaultFiles.files.downloaded.players.name)) {
+            Logger.log("Players file not found, waiting while it is created...");
+            return;
+        }
+
     fs.copyFileSync(
       defaultFiles.filePath +
         defaultFiles.files.downloaded.players.location +

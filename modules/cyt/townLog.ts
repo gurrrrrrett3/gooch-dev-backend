@@ -18,6 +18,12 @@ export default class TownLog {
         fs.mkdirSync(defaultFiles.filePath + dir);
       }
     });
+
+    defaultFiles.logs.files.forEach((file) => {
+        if (!fs.existsSync(defaultFiles.filePath + file)) {
+            fs.writeFileSync(defaultFiles.filePath + file, "[]");
+        }
+        });
   }
 
   public static saveOldTowns() {
@@ -227,6 +233,12 @@ export default class TownLog {
     });
 
     this.checkForPlayerLeave(oldPlayers, players);
+
+    players.forEach((player) => {
+        if (this.getPlayerName(player.uuid) !== player.name) {
+        this.saveUUID(player)
+        }
+    })
   }
 
   private static getOldTowns() {
@@ -254,4 +266,36 @@ export default class TownLog {
     }
     fs.writeFileSync(path.resolve(logFiles.path, file), JSON.stringify(fileData, null, 2));
   }
+
+  private static saveUUID(player: Player) {
+    if (!fs.existsSync(path.resolve(logFiles.path, "uuid.json"))) {
+      fs.writeFileSync(path.resolve(logFiles.path, "uuid.json"), JSON.stringify([{name: player.name, uuid: player.uuid}], null, 2));
+    } else {
+        const data = JSON.parse(fs.readFileSync(path.resolve(logFiles.path, "uuid.json"), "utf8"));
+        data.push({name: player.name, uuid: player.uuid});
+        fs.writeFileSync(path.resolve(logFiles.path, "uuid.json"), JSON.stringify(data, null, 2));
+    }
+  }
+
+    public static getUUID(name: string) {
+        const data = JSON.parse(fs.readFileSync(path.resolve(logFiles.path, "uuid.json"), "utf8"));
+        const player = data.find((player: Player) => {
+            return player.name === name;
+        });
+        if (player == undefined) {
+            return undefined;
+        }
+        return player.uuid;
+    }
+
+    public static getPlayerName(uuid: string) {
+        const data = JSON.parse(fs.readFileSync(path.resolve(logFiles.path, "uuid.json"), "utf8"));
+        const player = data.find((player: Player) => {
+            return player.uuid === uuid;
+        });
+        if (player == undefined) {
+            return undefined;
+        }
+        return player.name;
+    }
 }

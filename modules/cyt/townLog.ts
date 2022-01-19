@@ -259,6 +259,9 @@ export default class TownLog {
   }
 
   private static getOldTowns() {
+
+    fs.existsSync(defaultFiles.filePath + defaultFiles.logs.logFilePath + "towns.old.json") || Logger.log("No old towns file found, waiting for it...");
+
     const oldTowns = JSON.parse(
       fs.readFileSync(defaultFiles.filePath + defaultFiles.logs.logFilePath + "towns.old.json", "utf8")
     );
@@ -266,6 +269,9 @@ export default class TownLog {
   }
 
   private static getOldPlayers() {
+
+    fs.existsSync(defaultFiles.filePath + defaultFiles.logs.logFilePath + "players.old.json") || Logger.log("No old players file found, waiting for it...");
+
     const oldPlayers = JSON.parse(
       fs.readFileSync(defaultFiles.filePath + defaultFiles.logs.logFilePath + "players.old.json", "utf8")
     );

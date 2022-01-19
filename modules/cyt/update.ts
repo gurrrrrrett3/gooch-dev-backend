@@ -21,11 +21,15 @@ export default class CytUpdate {
   }
 
   private static checkForFiles() {
+
     defaultFiles.data.forEach((file) => {
       if (!fs.existsSync(path.resolve(defaultFiles.filePath, file.location + file.name))) {
+
+        fs.existsSync(path.resolve(defaultFiles.filePath, file.location)) || fs.mkdirSync(path.resolve(defaultFiles.filePath, file.location));
+
         fs.writeFileSync(
           path.resolve(defaultFiles.filePath, file.location + file.name),
-          JSON.stringify(file.data)
+          "[]"
         );
       }
     });

@@ -3,7 +3,7 @@ import path from "path";
 import Util from "../util";
 import Config from "../util/config";
 import Logger from "../util/logger";
-import { Player, Town } from "../util/types";
+import { Location, Player, Town } from "../util/types";
 import defaultFiles from "./data/defaultFiles.json";
 import logFiles from "./data/logFiles.json";
 
@@ -169,7 +169,11 @@ export default class TownLog {
         {
           date: Date.now(),
           name: player.name,
-          data: player,
+          location: {
+            x: player.x,
+            z: player.z,
+            world: player.world,
+          } 
         }
       );
       return;
@@ -181,10 +185,8 @@ export default class TownLog {
       //Player Teleported
       this.addDataToFile(path.resolve(logFiles.path, logFiles.PlayerTp, player.uuid + ".json"), {
         date: Date.now(),
-        uuid: player.uuid,
-        this: player.name,
-        oldPos: { x: oldPlayer.x, z: oldPlayer.z },
-        newPos: { x: player.x, z: player.z },
+        oldPos: { x: oldPlayer.x, z: oldPlayer.z, world: oldPlayer.world },
+        newPos: { x: player.x, z: player.z, world: player.world },
         distance: travelDistance,
       });
     }
@@ -199,13 +201,13 @@ export default class TownLog {
       if (!town) {
         //Town Fall
         this.addDataToFile(
-          path.resolve(logFiles.path, logFiles.townFall, oldTown.name + ".json"),
+          path.resolve(logFiles.path, logFiles.townFall, Util.genDateFilename() + ".json"),
 
           {
             date: Date.now(),
             name: oldTown.name,
             data: oldTown,
-          }
+          } 
         );
       }
     });
@@ -224,8 +226,12 @@ export default class TownLog {
 
           {
             date: Date.now(),
-            uuid: oldPlayer.uuid,
-            data: oldPlayer,
+            name: oldPlayer.name,
+            location: {
+                x: oldPlayer.x,
+                z: oldPlayer.z,
+                world: oldPlayer.world,
+              }
           }
         );
       }
@@ -288,6 +294,8 @@ export default class TownLog {
       fileData = [data];
     }
     fs.writeFileSync(path.resolve(logFiles.path, file), JSON.stringify(fileData, null, 2));
+
+    //Logger.log(`Added data to ${file}`, JSON.stringify(data));
   }
 
   private static saveUUID(player: Player) {
@@ -300,9 +308,9 @@ export default class TownLog {
     }
   }
 
-    public static getUUID(name: string) {
+    public static getUUID(name: string): string | undefined {
         const data = JSON.parse(fs.readFileSync(path.resolve(logFiles.path, "uuid.json"), "utf8"));
-        const player = data.find((player: Player) => {
+        const player = data.find((player: {name: string, uuid: string}) => {
             return player.name === name;
         });
         if (player == undefined) {
@@ -313,7 +321,7 @@ export default class TownLog {
 
     public static getPlayerName(uuid: string) {
         const data = JSON.parse(fs.readFileSync(path.resolve(logFiles.path, "uuid.json"), "utf8"));
-        const player = data.find((player: Player) => {
+        const player = data.find((player: {name: string, uuid: string}) => {
             return player.uuid === uuid;
         });
         if (player == undefined) {

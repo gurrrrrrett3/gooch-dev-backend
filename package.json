@@ -4,7 +4,8 @@
     "description": "",
     "main": "./dist/index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "tsc && node ."
     },
     "repository": {
         "type": "git",
@@ -19,6 +20,7 @@
     "homepage": "https://github.com/gurrrrrrett3/gooch-dev-backend#readme",
     "dependencies": {
         "express": "^4.17.2",
+        "fuzzyset": "^1.0.7",
         "node-fetch": "^2.6.6",
         "node-html-parser": "^5.2.0",
         "yaml": "^1.10.2"

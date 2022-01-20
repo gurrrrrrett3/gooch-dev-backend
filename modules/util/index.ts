@@ -28,4 +28,15 @@ export default class Util {
         return num < 10 ? "0" + num : num.toString();
       }
 
+      public static formatTime(time: number): string {
+        time /= 1000;
+        const days = Math.floor(time / 86400);
+        const hours = Math.floor((time % 86400) / 3600);
+        const minutes = Math.floor((time % 3600) / 60);
+        const seconds = Math.floor(time % 60);
+
+        return `${days ? days + " " : ""}${days ? "days" : ""}${hours ? hours + " " : ""}${hours ? "hours" : ""}${minutes ? minutes + " " : ""}${minutes ? "minutes" : ""} ${seconds ? seconds + " " : ""}${seconds ? "seconds" : ""}`;
+
+      }
+
 }

@@ -28,6 +28,18 @@ import TownLog from "./townLog";
 import defaultFiles from "./data/defaultFiles.json";
 import Logger from "../util/logger";
 
+/**
+ * Gets's data from the Database
+ * @param {GetDataOptions} options
+ * @returns {Promise<GetDataError | GetDataPlayerValues | GetDataTownValues>}
+ * @example getData({
+ *  type: "player",
+ * name: "playerName",
+ * timeframe: {
+ *  before: Date.now(),
+ * }
+ * })
+ */
 export default class dbManager {
   public static getData(options: GetDataOptions) {
     if (!options.timeFrame) {

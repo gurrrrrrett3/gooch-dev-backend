@@ -249,6 +249,7 @@ export default class TownLog {
   }
 
   public static updatePlayers(players: Player[]) {
+    if (!players) return
     const oldPlayers = this.getOldPlayers();
 
     players.forEach((player) => {

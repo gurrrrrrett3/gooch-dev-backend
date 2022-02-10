@@ -4,7 +4,9 @@ import indexRouter from "./routers/mainRouter";
 
 const App = express();
 
+App.use(express.json());
 App.use("/", indexRouter);
+
 
 export default class Website {
 

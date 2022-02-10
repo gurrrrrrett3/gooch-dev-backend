@@ -21,3 +21,10 @@ LoggerMode: "BOTH"
 #How far does a player have to travel in a "frame" to consider it a teleport?
 
 TeleportDistance: 250
+
+
+##ActiveLog
+
+#How many "Frames" do you want to store per file? 
+
+ActiveLogFileSize: 50000

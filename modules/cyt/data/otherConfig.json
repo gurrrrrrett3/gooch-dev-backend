@@ -1,0 +1,7 @@
+{
+    "mcServerStatusURL": "https://api.mcsrvstat.us/2/mc.craftyourtown.com",
+
+    "cyt": {
+        "pingEnabled": false
+    }
+}

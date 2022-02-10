@@ -75,4 +75,21 @@ router.get("/towns/fallen/:hours", (req, res) => {
   res.send(CYTDbInterface.getFallenTowns(parseInt(req.params.hours)));
 });
 
+router.post("/query", (req, res) => {
+    
+  const body = req.body;
+
+  console.log(body);
+
+  if (!CYTDbInterface.isValidQuery(body)) {
+    res.send({
+      error: "INVALID_QUERY",
+      message: "Invalid query",
+    });
+  } else {
+    res.send(CYTDbInterface.query(body));
+  }
+
+})
+
 export default router;

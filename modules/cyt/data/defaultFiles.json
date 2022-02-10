@@ -55,6 +55,7 @@
     "logs": {
         "logFilePath": "logs/",
         "dirs": [
+            "errors",
             "logs",
             "logs/townFall",
             "logs/townRise",
@@ -66,10 +67,12 @@
             "logs/assistantRemove",
             "logs/playerJoin",
             "logs/playerLeave",
-            "logs/mayorChange"
+            "logs/mayorChange",
+            "logs/activeLogs"
         ],
         "files": [
-            "logs/uuid.json"
+            "logs/uuid.json",
+            "logs/towns.old.json"
         ]
     }
 }

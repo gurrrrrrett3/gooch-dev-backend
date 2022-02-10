@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { Player, Town } from "../util/types";
+import { GetDataOptions, Player, Town } from "../util/types";
 import fileList from "./data/filelist.json";
 import defaultFiles from "./data/defaultFiles.json";
 import Util from "../util";
@@ -140,7 +140,7 @@ export default class CYTInterface {
   public static getPlayersNearby(playerName: string, radius: number): { player: string; distance: number }[] {
     return this.getSortedNearbyPlayers(playerName).filter((player: { player: string; distance: number }) => {
       return player.distance <= radius;
-    })
+    });
   }
 
   public static getSortedNearbyPlayers(playerName: string): { player: string; distance: number }[] {
@@ -154,15 +154,16 @@ export default class CYTInterface {
       const nearbyPlayers: { player: string; distance: number }[] = [];
 
       players.forEach((player2: Player) => {
-        if (typeof player == "string")  return
+        if (typeof player == "string") return;
         if (player.name !== player2.name && player.world === player2.world) {
-          nearbyPlayers.push({ player: player2.name, distance: Util.getDistance({ x: player.x, z: player.z }, { x: player2.x, z: player2.z }) });
+          nearbyPlayers.push({
+            player: player2.name,
+            distance: Util.getDistance({ x: player.x, z: player.z }, { x: player2.x, z: player2.z }),
+          });
         }
       });
 
       return nearbyPlayers.sort((a, b) => a.distance - b.distance);
     }
   }
-
-
 }

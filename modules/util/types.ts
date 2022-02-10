@@ -29,9 +29,9 @@ export type Town = {
 export interface Coords {
   x: number;
   z: number;
-};
+}
 
-export interface Location extends  Coords {
+export interface Location extends Coords {
   world: string;
 }
 
@@ -58,30 +58,63 @@ export type MarkerIconData = {
   };
 };
 
+export interface MCServerStausData {
+  debug: {
+    animatedmotd: boolean;
+    apiversion: number;
+    cachetime: number;
+    cnameinsrv: boolean;
+    ipinsrv: boolean;
+    ping: boolean;
+    query: boolean;
+    querymismatch: boolean;
+    srv: boolean;
+  };
+  hostname: string;
+  icon: string;
+  ip: string;
+  motd: {
+    clean: [string, string];
+    html: [string, string];
+    raw: [string, string];
+  };
+  online: boolean;
+  players: {
+    max: number;
+    online: number;
+  };
+  port: number;
+  protocol: number;
+  software: string;
+  version: string;
+}
+
 export type GetDataOptions = GetTownDataOptions | GetPlayerDataOptions;
 
-    export type GetTownDataOptions = {
-      type: "TOWN";
-      value: GetDataTownValues;
-      name?: string
-      timeFrame?: TimeFrameOptions;
-    }
+export type GetTownDataOptions = {
+  type: "TOWN";
+  value: GetDataTownValues;
+  name?: string;
+  timeFrame?: TimeFrameOptions;
+};
 
-  export type GetPlayerDataOptions = GetPlayerDataOptionsByName | GetPlayerDataOptionsByUUID;
+export type GetPlayerDataOptions = GetPlayerDataOptionsByName | GetPlayerDataOptionsByUUID;
 
-  export type GetPlayerDataOptionsByName = {
-    type: "PLAYER";
-    name: string;
-    value: GetDataPlayerValues;
-    timeFrame?: TimeFrameOptions;
-  }
+export type GetPlayerDataOptionsByName = {
+  type: "PLAYER";
+  dataType: "NAME";
+  name: string;
+  value: GetDataPlayerValues;
+  timeFrame?: TimeFrameOptions;
+};
 
-  export type GetPlayerDataOptionsByUUID = {
-    type: "PLAYER";
-    uuid: string;
-    value: GetDataPlayerValues;
-    timeFrame?: TimeFrameOptions;
-  }
+export type GetPlayerDataOptionsByUUID = {
+  type: "PLAYER";
+  dataType: "UUID";
+  uuid: string;
+  value: GetDataPlayerValues;
+  timeFrame?: TimeFrameOptions;
+};
 
 export type GetDataTownValues =
   | "assistantAdd"
@@ -92,6 +125,7 @@ export type GetDataTownValues =
   | "pvpToggle"
   | "townCreate"
   | "townDelete";
+
 export type TimeFrameOptions = {
   before?: number;
   after?: number;
@@ -100,84 +134,122 @@ export type TimeFrameOptions = {
 export type GetDataPlayerValues = "playerJoin" | "playerLeave" | "playerTeleport";
 
 export type GetDataError = {
-  error: string,
-  message: string,
-  request: GetDataOptions
-}
+  error: string;
+  message: string;
+  request: GetDataOptions;
+};
 
 export type LoadFileError = {
-  error: string,
-  message: string,
-  request: GetDataPlayerValues | GetDataTownValues | GetPlayerDataOptions | GetTownDataOptions
-}
+  error: string;
+  message: string;
+  request: GetDataPlayerValues | GetDataTownValues | GetPlayerDataOptions | GetTownDataOptions;
+};
 
 export type TownRiseReturn = {
-  date: number,
-  name: string,
-  data: Town
-}[]
+  date: number;
+  name: string;
+  data: Town;
+}[];
 
 export type TownFallReturn = {
-  date: number,
-  name: string,
-  data: Town
-}[]
+  date: number;
+  name: string;
+  data: Town;
+}[];
 
 export type PvpToggleReturn = {
-  date: number,
-  name: string,
-  state: boolean
-}[]
+  date: number;
+  name: string;
+  state: boolean;
+}[];
 
 export type ResidentJoinReturn = {
-  date: number,
-  name: string,
-  residents: string[]
-}[]
+  date: number;
+  name: string;
+  residents: string[];
+}[];
 
 export type ResidentLeaveReturn = {
-  date: number,
-  name: string,
-  residents: string[]
-}[]
+  date: number;
+  name: string;
+  residents: string[];
+}[];
 
 export type MayorChangeReturn = {
-  date: number,
-  name: string,
-  oldMayor: string,
-  newMayor: string
-}[]
+  date: number;
+  name: string;
+  oldMayor: string;
+  newMayor: string;
+}[];
 
 export type AssistantAddReturn = {
-  date: number,
-  name: string,
-  assistants: string[]
-}[]
+  date: number;
+  name: string;
+  assistants: string[];
+}[];
 
 export type AssistantRemoveReturn = {
-  date: number,
-  name: string,
-  assistants: string[]
-}[]
+  date: number;
+  name: string;
+  assistants: string[];
+}[];
 
 export type PlayerJoinReturn = {
-  date: number,
-  name: string,
-  location: Location
-}[]
+  date: number;
+  name: string;
+  location: Location;
+}[];
 
 export type PlayerLeaveReturn = {
-  date: number,
-  name: string,
-  location: Location
-}[]
+  date: number;
+  name: string;
+  location: Location;
+}[];
 
 export type PlayerTeleportReturn = {
-  date: number,
-        uuid: string,
-        oldPos: Location,
-        newPos: Location,
-        distance: number,
-}[]
+  date: number;
+  uuid: string;
+  oldPos: Location;
+  newPos: Location;
+  distance: number;
+}[];
 
-export type FileTypes = TownRiseReturn | TownFallReturn | PvpToggleReturn | ResidentJoinReturn | ResidentLeaveReturn | MayorChangeReturn | AssistantAddReturn | AssistantRemoveReturn | PlayerJoinReturn | PlayerLeaveReturn | PlayerTeleportReturn; 
+export type FileTypes =
+  | TownRiseReturn
+  | TownFallReturn
+  | PvpToggleReturn
+  | ResidentJoinReturn
+  | ResidentLeaveReturn
+  | MayorChangeReturn
+  | AssistantAddReturn
+  | AssistantRemoveReturn
+  | PlayerJoinReturn
+  | PlayerLeaveReturn
+  | PlayerTeleportReturn;
+
+export interface ActiveLogFile {
+  global: ActiveLogGlobalData;
+  data: ActiveLogFileData;
+}
+
+export interface ActiveLogGlobalData {
+  firstDate: number;
+  lastDate: number;
+  logCount: number;
+}
+
+export type ActiveLogFileData = ActiveLogFrameData[];
+
+export interface ActiveLogFrameData {
+  date: number;
+  serverOnline: boolean;
+  playersOnline: number;
+  playersMax: number;
+}
+
+export interface ActiveLogMapStats {
+  total: number;
+  worlds: {
+    [key: string]: number;
+  };
+}

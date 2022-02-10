@@ -9,6 +9,8 @@ import CYTParse from "./parse";
 import Logger from "../util/logger";
 import TownLog from "./townLog";
 import CYTInterface from "./interface";
+import otherConfig from "./data/otherConfig.json";
+import CYTActiveLogManager from "./activeLogManager";
 export default class CytUpdate {
   public static async startUpdate() {
     TownLog.init();
@@ -18,6 +20,7 @@ export default class CytUpdate {
     await this.downloadFiles();
     TownLog.updateTowns(CYTInterface.getTownFile());
     TownLog.updatePlayers(CYTInterface.getPlayerFile());
+    CYTActiveLogManager.Update()
   }
 
   private static checkForFiles() {
@@ -61,6 +64,9 @@ export default class CytUpdate {
       url: string;
     }
   ): Promise<void> {
+
+    if (!otherConfig.cyt.pingEnabled) return;
+
     try {
       const res = await fetch(filelist.baseURL + file.url, fetchData);
       const data = await res.json();
@@ -109,6 +115,7 @@ export default class CytUpdate {
     };
 
     const towns: Town[] = [];
+    if (markers.world[1]) {
     try {
       Object.keys(markers).forEach((world) => {
         //@ts-ignore
@@ -122,6 +129,7 @@ export default class CytUpdate {
     } catch (error) {
       Logger.log(`Failed to parse towns`, error);
     }
+  }
 
     fs.writeFileSync(
       path.resolve(
@@ -132,3 +140,4 @@ export default class CytUpdate {
     );
   }
 }
+

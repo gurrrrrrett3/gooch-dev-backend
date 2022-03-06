@@ -1,6 +1,6 @@
 import CytUpdate from "./update";
 export default class CYT {
-  private interval: any;
+  private interval: NodeJS.Timer;
   //@ts-ignore
   public static instance: CYT;
 

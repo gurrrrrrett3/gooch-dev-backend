@@ -39,6 +39,7 @@ export default class CytUpdate {
   }
 
   private static async downloadFiles(): Promise<void> {
+
     let downloadCount = filelist.data.length;
     for (const file of filelist.data) {
       await this.queueDownload(file).then(() => {
@@ -68,6 +69,7 @@ export default class CytUpdate {
     if (!otherConfig.cyt.pingEnabled) return;
 
     try {
+      console.log(`Downloading ${filelist.baseURL + file.url}`);
       const res = await fetch(filelist.baseURL + file.url, fetchData);
       const data = await res.json();
       fs.writeFileSync(path.resolve(filelist.filePath, file.fileLocation, file.fileName ), JSON.stringify(data, null, 2));

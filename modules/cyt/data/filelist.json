@@ -1,5 +1,5 @@
 {
-    "baseURL": "https://zion.craftyourtown.com/",
+    "baseURL": "https://map.craftyourtown.com/",
     "filePath": "modules/cyt/data/",
     "data": [{
             "fileName": "players.json",
@@ -34,4 +34,4 @@
             "url": "/tiles/world/markers.json"
         }
     }
-}
+} 
